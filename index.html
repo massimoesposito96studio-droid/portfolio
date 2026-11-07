@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it"><script src="chrome-extension://pphgdbgldlmicfdkhondlafkiomnelnk/content/location/location.js" id="pphgdbgldlmicfdkhondlafkiomnelnk"></script><script src="chrome-extension://mfidniedemcgceagapgdekdbmanojomk/js/elephant.js"></script><script src="chrome-extension://pphgdbgldlmicfdkhondlafkiomnelnk/libs/extend-native-history-api.js"></script><script src="chrome-extension://pphgdbgldlmicfdkhondlafkiomnelnk/libs/requests.js"></script><head>
+<html lang="it"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PharmakoS — Foto &amp; Video · Napoli</title>
@@ -458,6 +458,7 @@ nav .links a:hover span{transform:translateY(-100%)}
 .name span{display:inline-block;transform:translateY(110%) rotate(8deg);opacity:0;transition:transform 1.1s cubic-bezier(.2,.9,.2,1),opacity .6s}
 .go .name span{transform:none;opacity:1}
 .name .s{color:var(--acid)}
+body.editing .name span{transform:none;opacity:1;transition:none}
 .sub{margin-top:3vh;display:flex;gap:clamp(10px,2vw,26px);justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(14px);transition:1s .9s}
 .go .sub{opacity:1;transform:none}
 .sub span{border:1px solid var(--line);padding:9px 14px;border-radius:999px;background:rgba(11,13,12,.5);backdrop-filter:blur(6px)}
@@ -483,7 +484,7 @@ nav .links a:hover span{transform:translateY(-100%)}
 
 /* ===== VIDEO / LAVORI: binario orizzontale ===== */
 .work{background:var(--bg2)}
-.track{display:flex;gap:clamp(14px,2vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 clamp(16px,4vw,56px) 10px;scrollbar-width:none}
+.track{scroll-padding-inline:clamp(16px,4vw,56px);display:flex;gap:clamp(14px,2vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 clamp(16px,4vw,56px) 10px;scrollbar-width:none}
 .track::-webkit-scrollbar{display:none}
 .card{flex:0 0 clamp(270px,38vw,560px);scroll-snap-align:start;cursor:pointer}
 .card .m{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#1a1d1b}
@@ -608,6 +609,37 @@ footer{display:flex;justify-content:space-between;width:100%;margin-top:12vh;col
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.wipe{opacity:1;transform:none;clip-path:none}}
 
 
+/* reels verticali */
+.reels{background:var(--bg);--secbg:var(--bg)}
+.reels .hd{align-items:end}
+.rside{display:flex;flex-direction:column;align-items:flex-end;gap:18px;max-width:380px}
+.rside p{color:var(--mute);text-align:right}
+.rstrip{scroll-padding-inline:clamp(16px,4vw,56px);display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;padding:10px clamp(16px,4vw,56px) 70px;scrollbar-width:none;align-items:flex-start}
+.rstrip::-webkit-scrollbar{display:none}
+.rc{flex:0 0 clamp(200px,19vw,290px);scroll-snap-align:start;cursor:pointer;position:relative;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.rc:nth-child(even){margin-top:56px}
+.rc .rm{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#1a1d1b;border:1px solid var(--line);transition:border-color .4s,box-shadow .5s}
+.rc:hover{transform:translateY(-10px) rotate(-1.2deg)}
+.rc:nth-child(even):hover{transform:translateY(-10px) rotate(1.2deg)}
+.rc:hover .rm{border-color:var(--acid);box-shadow:0 30px 60px -20px color-mix(in srgb,var(--acid) 35%,transparent)}
+.rc .rm::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 22%,transparent 55%,rgba(0,0,0,.8));pointer-events:none}
+.rc .seg{position:absolute;left:12px;right:12px;top:12px;display:flex;gap:4px;z-index:2}
+.rc .seg i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
+.rc .seg i::after{content:"";display:block;height:100%;width:100%;background:var(--acid);transform:scaleX(0);transform-origin:left}
+.rc .seg i:first-child::after{transform:scaleX(1)}
+.rc:hover .seg i:nth-child(2)::after{transition:transform 1.4s linear;transform:scaleX(1)}
+.rc:hover .seg i:nth-child(3)::after{transition:transform 1.4s linear 1.4s;transform:scaleX(1)}
+.rc .hdl{position:absolute;left:14px;top:24px;z-index:2;display:flex;align-items:center;gap:7px;color:#fff;font-size:11px}
+.rc .hdl b{width:20px;height:20px;border-radius:50%;background:var(--acid);display:inline-block;box-shadow:0 0 0 2px #000,0 0 0 3px var(--acid)}
+.rc .rcap{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;color:#fff}
+.rc .rcap h3{font:700 clamp(17px,1.4vw,22px)/1.05 Syne;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px}
+.rc .rcap .mono{display:flex;align-items:center;gap:6px;color:var(--acid)}
+.rc .rpl{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--acid);display:grid;place-items:center;z-index:2;transform:scale(.6);opacity:0;transition:.5s cubic-bezier(.3,1.5,.5,1)}
+.rc:hover .rpl{transform:none;opacity:1}
+.rc .rnum{position:absolute;right:-6px;bottom:-46px;font:800 64px/1 Syne;-webkit-text-stroke:1.5px var(--line);color:transparent;z-index:0;pointer-events:none}
+.rc .tl{z-index:3}
+@media(max-width:760px){.reels .hd{flex-direction:column;align-items:flex-start}.rside{align-items:flex-start;max-width:none}.rside p{text-align:left}.rc{flex-basis:62vw}.rc:nth-child(even){margin-top:34px}.rc .rnum{font-size:48px;bottom:-38px}}
+@media(hover:none){.rc .rpl{opacity:1;transform:scale(.75)}}
 /* servizi a fisarmonica */
 .sv{border-bottom:1px solid var(--line)}
 .svh{display:grid;grid-template-columns:60px 1fr auto auto;gap:20px;align-items:center;padding:clamp(18px,3vh,30px) 0;cursor:pointer}
@@ -725,7 +757,7 @@ body.editing .card .m,body.editing .pm,body.editing .pic,body.editing .screen{ou
 body.editing [data-img]{outline:none}
 </style>
 </head>
-<body __processed_6c3d4337-4c71-4ee5-aed9-4602685bbb2f__="true">
+<body>
 <div id="prog"></div>
 <div id="cur"></div>
 
@@ -743,7 +775,7 @@ body.editing [data-img]{outline:none}
   <div class="cols" id="cols"></div>
   <div class="ht">
     <span class="who mono"><i></i><span data-k="who"></span></span>
-    <h1 class="name d" id="name"></h1>
+    <h1 class="name d" id="name" data-k="brand"></h1>
     <div class="sub mono" id="tags"></div>
   </div>
   <div class="hud mono"><span id="tc">00:00:00:00</span><a href="#lavori" class="cue"><i></i><span data-k="cue"></span></a><span data-k="hud"></span></div>
@@ -758,6 +790,16 @@ body.editing [data-img]{outline:none}
   <div class="bar"><i id="barI"></i></div>
   <div class="edonly addw"><button class="addb" data-act="addVideo">+ Aggiungi video</button></div>
   <div style="height:clamp(70px,12vh,130px)"></div>
+</section>
+
+<section class="reels" id="reels">
+  <div class="wrap" style="padding-bottom:30px">
+    <div class="hd"><div><span class="kick mono rv"><span class="snum"></span><span data-k="k6"></span></span><h2 class="d wipe"><span data-k="h6a"></span> <em data-k="h6b"></em></h2></div>
+      <div class="rside"><p class="rv" data-k="d6"></p><div class="arrows"><button id="rPrev" aria-label="Indietro">←</button><button id="rNext" aria-label="Avanti">→</button></div></div></div>
+  </div>
+  <div class="rstrip" id="rstrip"></div>
+  <div class="edonly addw"><button class="addb" data-act="addReel">+ Aggiungi reel</button></div>
+  <div style="height:clamp(60px,10vh,110px)"></div>
 </section>
 
 <section class="wrap" id="foto">
@@ -897,6 +939,30 @@ const PRISTINE="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
  "allLbl": "Tutte",
  "ring": "PLAY ✳ SHOWREEL ✳ PLAY ✳ SHOWREEL ✳ ",
  "styles": {
+  "k:h1b": {
+   "s": 0.7
+  },
+  "k:h1a": {
+   "s": 0.7
+  },
+  "k:h6a": {
+   "s": 0.7
+  },
+  "k:h6b": {
+   "s": 0.7
+  },
+  "k:h2a": {
+   "s": 0.7
+  },
+  "k:h2b": {
+   "s": 0.7
+  },
+  "k:h3a": {
+   "s": 0.7
+  },
+  "k:h3b": {
+   "s": 0.7
+  },
   "p:services.0.0": {
    "s": 0.6
   },
@@ -909,41 +975,23 @@ const PRISTINE="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
   "p:services.3.0": {
    "s": 0.6
   },
-  "k:h3b": {
-   "s": 0.7
-  },
-  "k:h3a": {
-   "s": 0.7
-  },
-  "k:h2b": {
-   "s": 0.7
-  },
-  "k:h2a": {
-   "s": 0.7
-  },
-  "k:h1b": {
-   "s": 0.7
-  },
-  "k:h1a": {
-   "s": 0.7
-  },
-  "k:h5b": {
-   "s": 0.8
-  },
-  "k:h5a": {
-   "s": 0.8
-  },
-  "p:services.3.1": {
-   "s": 0.9
-  },
-  "p:services.2.1": {
+  "p:services.0.1": {
    "s": 0.9
   },
   "p:services.1.1": {
    "s": 0.9
   },
-  "p:services.0.1": {
+  "p:services.2.1": {
    "s": 0.9
+  },
+  "p:services.3.1": {
+   "s": 0.9
+  },
+  "k:h5a": {
+   "s": 0.7
+  },
+  "k:h5b": {
+   "s": 0.7
   }
  },
  "videos": [
@@ -1161,8 +1209,46 @@ const PRISTINE="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
    ]
   ]
  ],
+ "k6": "Reels",
+ "h6a": "Short",
+ "h6b": "form",
+ "d6": "Contenuti verticali per Instagram e TikTok: ritmo veloce, primi 2 secondi che agganciano. Clicca per guardarli.",
+ "rHandle": "@pharmakos_",
+ "reels": [
+  {
+   "t": "Night ride",
+   "c": "128K",
+   "src": "@P2",
+   "link": ""
+  },
+  {
+   "t": "Napoli in 15 secondi",
+   "c": "84K",
+   "src": "@P5",
+   "link": ""
+  },
+  {
+   "t": "Backstage shooting",
+   "c": "52K",
+   "src": "@P8",
+   "link": ""
+  },
+  {
+   "t": "Speed & neon",
+   "c": "210K",
+   "src": "@P11",
+   "link": ""
+  },
+  {
+   "t": "Street portrait",
+   "c": "39K",
+   "src": "@P14",
+   "link": ""
+  }
+ ],
  "order": [
   "lavori",
+  "reels",
   "foto",
   "reel",
   "servizi",
@@ -1172,6 +1258,7 @@ const PRISTINE="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
  "snum": true,
  "navl": {
   "lavori": "Video",
+  "reels": "Reels",
   "foto": "Foto",
   "reel": "Showreel",
   "servizi": "Servizi",
@@ -1222,7 +1309,7 @@ const ORI={v:4/5,h:3/2};
 
 /* ===== DISEGNO DEL SITO ===== */
 function renderTexts(){$$("[data-k]").forEach(el=>{if(document.activeElement===el)return;const v=SITE[el.dataset.k];if(v!=null)el.textContent=v});
-  $("#name").innerHTML=[...SITE.brand].map((c,i,a)=>`<span class="${i===a.length-1?"s":""}" style="transition-delay:${(document.body.classList.contains("go")?0:1.05)+i*.06}s">${esc(c)}</span>`).join("");fitName();
+  if(document.activeElement!==$("#name"))if(ED())$("#name").textContent=SITE.brand;else $("#name").innerHTML=[...SITE.brand].map((c,i,a)=>`<span class="${i===a.length-1?"s":""}" style="transition-delay:${(document.body.classList.contains("go")?0:1.05)+i*.06}s">${esc(c)}</span>`).join("");fitName();
   $("#stampTxt").textContent=SITE.stamp;$("#ringTxt").textContent=SITE.ring??"PLAY ✳ SHOWREEL ✳ PLAY ✳ SHOWREEL ✳ ";$("#mag").href="mailto:"+SITE.email;$("#mag").classList.toggle("off",SITE.showBtn===false);
   $("#reelBox").innerHTML=media(SITE.reel,SITE.reelBig);$("#aboutBox").innerHTML=media(SITE.about,SITE.brand)}
 function renderHero(){const P=SITE.photos;
@@ -1232,6 +1319,17 @@ function renderVideos(){$("#track").innerHTML=SITE.videos.map((v,n)=>{const o=v.
     <div class="m" style="aspect-ratio:${o==="v"?"4/5":"16/10"}">${media(v,v.t)}<span class="tc mono"><b>●</b> <span data-p="videos.${n}.tc">${esc(v.tc??`${pad(n+1)}:00:${pad(12+n*7)}`)}</span></span><span class="pl"><svg width="22" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="var(--bg)"/></svg></span>
     <div class="tl"><button data-act="mvV" data-i="${n}" data-d="-1">←</button><button data-act="mvV" data-i="${n}" data-d="1">→</button><button data-act="oriV" data-i="${n}">${o==="v"?"▯":"▭"}</button><button data-act="crop" data-path="videos.${n}">⤢</button><button data-act="delV" data-i="${n}" class="r">×</button></div></div>
     <div class="meta"><h3 data-p="videos.${n}.t">${esc(v.t)}</h3><span class="mono"><span data-p="videos.${n}.c">${esc(v.c)}</span> · <span data-p="videos.${n}.y">${esc(v.y)}</span></span></div></article>`}).join("");upBar()}
+function rMedia(o,alt){const s=SRC(o.src);if(!s)return `<div class="ph0"></div>`;
+  return isVid(s)?`<video class="cm" src="${s}" muted loop playsinline preload="metadata" style="${cropSt(o)}"></video>`:`<img class="cm" src="${s}" alt="${esc(alt)}" loading="lazy" decoding="async" style="${cropSt(o)}">`}
+function renderReels(){SITE.reels=SITE.reels||[];$("#rstrip").innerHTML=SITE.reels.map((r,n)=>`<article class="rc rv in" data-r="${n}">
+    <div class="rm" data-img="reels.${n}.src" data-vid="reels.${n}.link">${rMedia(r,r.t)}<div class="seg"><i></i><i></i><i></i></div>
+    <span class="hdl mono"><b></b><span data-k="rHandle">${esc(SITE.rHandle||"")}</span></span>
+    <span class="rpl"><svg width="24" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="var(--bg)"/></svg></span>
+    <div class="rcap"><h3 data-p="reels.${n}.t">${esc(r.t)}</h3><span class="mono"><svg width="11" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="currentColor"/></svg><span data-p="reels.${n}.c">${esc(r.c)}</span></span></div>
+    <div class="tl"><button data-act="mvR" data-i="${n}" data-d="-1">←</button><button data-act="mvR" data-i="${n}" data-d="1">→</button><button data-act="crop" data-path="reels.${n}">⤢</button><button data-act="delR" data-i="${n}" class="r">×</button></div></div>
+    <span class="rnum" aria-hidden="true">${pad(n+1)}</span></article>`).join("");
+  $$("#rstrip video").forEach(v=>rio.observe(v))}
+const rio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&e.intersectionRatio>.55)v.play().catch(()=>{});else v.pause()}),{threshold:[0,.55,1]});
 let cat="Tutte";
 function catsList(all){const used=[...new Set(SITE.photos.map(p=>p.c).filter(Boolean))];return [...new Set([...(all?(SITE.cats||[]):[]),...used])]}
 const oriOf=p=>p.o||((p.w||4)/(p.h||5)>1.05?"h":"v");
@@ -1254,8 +1352,8 @@ function renderLists(){
     <div class="svb"><div><div class="svi"><p data-p="services.${i}.1">${esc(d)}</p><ul class="mono">${(tg||[]).map((x,j)=>`<li><span data-p="services.${i}.2.${j}">${esc(x)}</span><button class="x1" data-act="delSt" data-i="${i}" data-j="${j}">×</button></li>`).join("")}<li class="edonly"><button class="addb sm" data-act="addSt" data-i="${i}">+ etichetta</button></li></ul></div></div></div></div>`).join("");
   $("#facts").innerHTML=SITE.facts.map(([n,l],i)=>`<div><b class="cnt" data-n="${esc(n)}" data-p="facts.${i}.0">${esc(n)}</b><span class="mono" data-p="facts.${i}.1">${esc(l)}</span><span class="ft"><button class="x1 mv" data-act="mvF" data-i="${i}" data-d="-1">←</button><button class="x1 mv" data-act="mvF" data-i="${i}" data-d="1">→</button><button class="x1" data-act="delF" data-i="${i}">×</button></span></div>`).join("")+`<button class="addb sm edonly" data-act="addF">+</button>`;
   $("#soc").innerHTML=SITE.links.map(([t,h],i)=>`<a href="${esc(h)}" data-li="${i}"><span data-p="links.${i}.0">${esc(t)}</span> ↗<button class="x1 mv" data-act="mvL" data-i="${i}" data-d="-1">←</button><button class="x1" data-act="delL" data-i="${i}">×</button></a>`).join("")+`<button class="addb sm edonly" data-act="addL">+ Link</button>`}
-const SECS=["lavori","foto","reel","servizi","about"];
-function applyLayout(){SITE.order=(SITE.order||SECS).filter(id=>SECS.includes(id));SECS.forEach(id=>{if(!SITE.order.includes(id))SITE.order.push(id)});
+const SECS=["lavori","reels","foto","reel","servizi","about"];
+function applyLayout(){SITE.order=(SITE.order||SECS).filter(id=>SECS.includes(id));SECS.forEach((id,k)=>{if(!SITE.order.includes(id)){const prev=SECS[k-1],j=SITE.order.indexOf(prev);SITE.order.splice(j<0?SITE.order.length:j+1,0,id)}});if(SITE.navl&&!SITE.navl.reels)SITE.navl.reels="Reels";
   const c=$("#contatti"),hid=SITE.hidden||[],vis=SITE.order.filter(id=>!hid.includes(id)),L=SITE.navl||{};
   SITE.order.forEach(id=>{const el=document.getElementById(id);c.parentNode.insertBefore(el,c);el.style.display=hid.includes(id)?"none":""});
   const all=[...vis,"contatti"];$$(".snum").forEach(s=>{const sec=s.closest("section");const i=all.indexOf(sec&&sec.id);s.textContent=SITE.snum&&i>=0?`${pad(i+1)} / ${pad(all.length)} — `:""});
@@ -1275,7 +1373,7 @@ function styleAll(){const S=SITE.styles||{};$$("[data-k],[data-p]").forEach(el=>
   if(st.c){if(el.matches(".hd h2 em"))el.style.webkitTextStrokeColor=st.c;else el.style.color=st.c}
   if(st.s&&st.s!==1){const base=parseFloat(getComputedStyle(el).fontSize);el.style.fontSize=base*st.s+"px"}});fitName()}
 let stT;addEventListener("resize",()=>{clearTimeout(stT);stT=setTimeout(styleAll,250)});
-function renderAll(){applyLayout();renderTexts();renderHero();renderVideos();renderPhotos();renderLists();if(ED())editable(true);styleAll();if(selEl&&!document.body.contains(selEl))hideSty()}
+function renderAll(){applyLayout();renderTexts();renderHero();renderVideos();renderPhotos();renderReels();renderLists();if(ED())editable(true);styleAll();if(selEl&&!document.body.contains(selEl))hideSty()}
 
 /* ===== ANIMAZIONI ===== */
 (function(){/* diaframma: 8 lamelle che ruotano attorno al foro e si aprono */
@@ -1295,7 +1393,7 @@ function renderAll(){applyLayout();renderTexts();renderHero();renderVideos();ren
     const k=Math.min((t-T1)/T2,1),e=ease(k);draw(r0+(R*.75-r0)*e,.35+e*1.1,1-e);
     if(k<1)requestAnimationFrame(f);else intro.style.display="none"})(t0)})();
 
-function fitName(){const n=$("#name");n.style.fontSize="";const w=innerWidth*.92;if(n.scrollWidth>w)n.style.fontSize=parseFloat(getComputedStyle(n).fontSize)*w/n.scrollWidth+"px"}
+function fitName(){const n=$("#name");n.style.fontSize="";const m=((SITE.styles||{})["k:brand"]||{}).s||1;if(m!==1)n.style.fontSize=parseFloat(getComputedStyle(n).fontSize)*m+"px";const w=innerWidth*.92;if(n.scrollWidth>w)n.style.fontSize=parseFloat(getComputedStyle(n).fontSize)*w/n.scrollWidth+"px"}
 addEventListener("resize",fitName);if(document.fonts)document.fonts.ready.then(fitName);
 const t0=performance.now();setInterval(()=>{const f=Math.floor((performance.now()-t0)/1000*24),s=Math.floor(f/24);$("#tc").textContent=[Math.floor(s/3600),Math.floor(s/60)%60,s%60,f%24].map(pad).join(":")},1000/24);
 const tr=$("#track"),barI=$("#barI");
@@ -1305,6 +1403,10 @@ $("#prev").onclick=()=>tr.scrollBy({left:-tr.clientWidth*.6,behavior:"smooth"});
 let dg=null;tr.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse"||ED())return;dg={x:e.clientX,s:tr.scrollLeft,m:0};tr.style.scrollSnapType="none"});
 addEventListener("pointermove",e=>{if(!dg)return;dg.m=Math.abs(e.clientX-dg.x);tr.scrollLeft=dg.s-(e.clientX-dg.x)});
 addEventListener("pointerup",()=>{if(dg){tr.style.scrollSnapType="";setTimeout(()=>dg=null,0)}});
+const rs=$("#rstrip");$("#rPrev").onclick=()=>rs.scrollBy({left:-rs.clientWidth*.6,behavior:"smooth"});$("#rNext").onclick=()=>rs.scrollBy({left:rs.clientWidth*.6,behavior:"smooth"});
+let rdg=null;rs.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse"||ED())return;rdg={x:e.clientX,s:rs.scrollLeft,m:0};rs.style.scrollSnapType="none"});
+addEventListener("pointermove",e=>{if(!rdg)return;rdg.m=Math.abs(e.clientX-rdg.x);rs.scrollLeft=rdg.s-(e.clientX-rdg.x)});
+addEventListener("pointerup",()=>{if(rdg){rs.style.scrollSnapType="";setTimeout(()=>rdg=null,0)}});
 $("#svc").addEventListener("click",e=>{if(ED())return;const h=e.target.closest(".svh");if(!h)return;const it=h.parentNode,was=it.classList.contains("open");$$(".sv").forEach(x=>x.classList.remove("open"));if(!was)it.classList.add("open");openSvc=was?-1:+it.dataset.s});
 $("#filters").addEventListener("click",e=>{const b=e.target.closest("[data-c]");if(!b||b.dataset.act)return;e.stopPropagation();cat=b.dataset.c;const G=$("#mason");G.style.opacity=0;setTimeout(()=>{renderPhotos();if(ED())editable(true);G.style.opacity=1},220)},true);
 
@@ -1327,6 +1429,7 @@ function closeLb(){lb.className="";setTimeout(()=>vb.innerHTML="",400)}
 document.addEventListener("click",e=>{if(ED())return;
   const f=e.target.closest(".ph");if(f){openPhoto(+f.dataset.i);return}
   const c=e.target.closest(".card");if(c&&!(dg&&dg.m>6)){const v=SITE.videos[c.dataset.v];openVideo(v,v.t);return}
+  const rc=e.target.closest(".rc");if(rc&&!(rdg&&rdg.m>6)){const r=SITE.reels[rc.dataset.r];openVideo(Object.assign({},r,{o:"v"}),r.t);return}
   if(e.target.closest("#screen"))openVideo(SITE.reel,SITE.reelBig)});
 lb.addEventListener("click",e=>{if(e.target.closest(".pv"))step(-1);else if(e.target.closest(".nx"))step(1);else if(e.target===lb||e.target.closest(".x"))closeLb()});
 addEventListener("keydown",e=>{if(!lb.classList.contains("on"))return;if(e.key==="Escape")closeLb();if(e.key==="ArrowRight")step(1);if(e.key==="ArrowLeft")step(-1)});
@@ -1359,7 +1462,7 @@ function editable(on){$$("[data-k],[data-p]").forEach(el=>on?el.setAttribute("co
 function toggle(){const on=!ED();document.body.classList.toggle("editing",on);eT.textContent=on?"✓ Fine":"✎ Modifica";
   if(on){commit();toast("Clicca testi, foto e pulsanti per modificarli")}else hideSty();renderAll();$$(".rv,.wipe,.ph").forEach(x=>x.classList.add("in"))}
 eT.onclick=toggle;
-const rd=el=>{el.style.textTransform="none";const v=el.innerText;el.style.textTransform="";return v};
+const rd=el=>{const o=el.style.textTransform;el.style.textTransform="none";const v=el.id==="name"?el.textContent.replace(/\s*\n\s*/g,""):el.innerText;el.style.textTransform=o;return v};
 document.addEventListener("input",e=>{const el=e.target;if(!ED()||!(el.dataset.k||el.dataset.p))return;let v=rd(el);if(!v.trim()){el.innerHTML="";v=""}
   if(el.dataset.k){SITE[el.dataset.k]=v;$$(`[data-k="${el.dataset.k}"]`).forEach(o=>o!==el&&(o.textContent=v));if(el.dataset.k==="email")$("#mag").href="mailto:"+v;if(el.dataset.k==="brand")applyLayout()}
   else{setP(el.dataset.p,v);if(el.dataset.n!==undefined)el.dataset.n=v}soon()});
@@ -1376,7 +1479,7 @@ function shrink(file,mx=1920){return new Promise(res=>{const i=new Image();i.onl
 const readURL=f=>new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f)});
 async function loadMedia(f){if(f.type.startsWith("video")){if(f.size>15e6){toast(`"${f.name}" è troppo pesante (max 15 MB)`);return null}if(f.size>6e6)toast(`"${f.name}" è pesante: il sito sarà più lento`);return {url:await readURL(f),video:true}}return await shrink(f)}
 const mv=(arr,i,d)=>{const j=i+d;if(j<0||j>=arr.length)return false;[arr[i],arr[j]]=[arr[j],arr[i]];return true};
-function remapRefs(fn){const fix=o=>{const v=o.src;if(typeof v!=="string"||!v.startsWith("@P"))return;const n=fn(+v.slice(2));o.src=n==null?SITE.photos[+v.slice(2)]?.src||"":"@P"+n};fix(SITE.reel);fix(SITE.about);SITE.videos.forEach(fix)}
+function remapRefs(fn){const fix=o=>{const v=o.src;if(typeof v!=="string"||!v.startsWith("@P"))return;const n=fn(+v.slice(2));o.src=n==null?SITE.photos[+v.slice(2)]?.src||"":"@P"+n};fix(SITE.reel);fix(SITE.about);SITE.videos.forEach(fix);(SITE.reels||[]).forEach(fix)}
 document.addEventListener("click",async e=>{if(!ED())return;if(e.target.closest("#eb,#dlg,#toast,#lb,#pan,#crop,#sty"))return;
   if(e.target.closest("[contenteditable]")){if(e.target.closest("a"))e.preventDefault();e.stopPropagation();return}
   if(e.target.closest("#filters [data-c]:not([data-act])"))return;
@@ -1398,6 +1501,10 @@ document.addEventListener("click",async e=>{if(!ED())return;if(e.target.closest(
     case "oriV":{const v=SITE.videos[i];v.o=v.o==="v"?"h":"v";break}
     case "addVideo":ask("Nuovo video",[{label:"Titolo",value:""},{label:"Categoria (es. Videoclip)",value:""},{label:"Anno",value:"2026"},{label:"Copertina: foto o breve clip MP4",file:true,accept:"image/*,video/*"},{label:"Link YouTube, Vimeo, Instagram o TikTok",value:"",ph:"https://…"}],async([t,c,y,f,l])=>{
       const m=f&&f[0]?await loadMedia(f[0]):null;SITE.videos.push({t:t||"Nuovo video",c:c||"Video",y,src:m?m.url:"",link:l,r:m&&m.w?m.w/m.h:undefined});done()});return
+    case "mvR":mv(SITE.reels,i,d);break;
+    case "delR":SITE.reels.splice(i,1);break;
+    case "addReel":ask("Nuovo reel",[{label:"Titolo",value:""},{label:"Visualizzazioni o etichetta (es. 120K)",value:""},{label:"Copertina: foto o breve clip MP4 verticale",file:true,accept:"image/*,video/*"},{label:"Link Instagram, TikTok o YouTube Shorts",value:"",ph:"https://www.instagram.com/reel/…"}],async([t,c,f,l])=>{
+      const m=f&&f[0]?await loadMedia(f[0]):null;SITE.reels.push({t:t||"Nuovo reel",c:c||"",src:m?m.url:"",link:l});done()});return
     case "crop":openCrop(a.dataset.path);return
     case "mvS":mv(SITE.services,i,d);break;
     case "delS":SITE.services.splice(i,1);break;
@@ -1451,7 +1558,7 @@ $("#styC").oninput=e=>{if(!selEl)return;SITE.styles=SITE.styles||{};const st=SIT
 const cEl=$("#crop"),cBox=$("#cBox"),cImg=$("#cImg"),cZ=$("#cZ");let C=null;
 function drawCrop(){cImg.style.cssText=cropSt(C)}
 function openCrop(path){const o=getP(path),s=SRC(o.src);if(!s){toast("Prima carica un'immagine");return}if(isVid(s)){toast("L'inquadratura funziona sulle foto");return}
-  const box=path.startsWith("photos.")?(oriOf(o)==="v"?"4/5":"3/2"):path==="reel"?(innerWidth<760?"4/5":"16/9"):path==="about"?"4/5":(o.o==="v"?"4/5":"16/10");
+  const box=path.startsWith("photos.")?(oriOf(o)==="v"?"4/5":"3/2"):path==="reel"?(innerWidth<760?"4/5":"16/9"):path==="about"?"4/5":path.startsWith("reels.")?"9/16":(o.o==="v"?"4/5":"16/10");
   C={o,z:+o.z||1,x:o.x??50,y:o.y??50};cBox.style.aspectRatio=box;cImg.src=s;cZ.value=C.z;cEl.classList.add("on");drawCrop()}
 cZ.oninput=()=>{C.z=+cZ.value;drawCrop()};
 let cd=null;cBox.addEventListener("pointerdown",e=>{cd={x:e.clientX,y:e.clientY,ox:C.x,oy:C.y};cBox.setPointerCapture(e.pointerId)});
@@ -1462,7 +1569,7 @@ $("#cOk").onclick=()=>{Object.assign(C.o,{z:C.z,x:Math.round(C.x),y:Math.round(C
 
 /* pannelli: Sito, Header, Sezioni, Colori */
 const pan=$("#pan"),pB=$("#pB");let pm="";
-const NAMES={lavori:"Video",foto:"Foto",reel:"Showreel",servizi:"Servizi",about:"Chi sono"};
+const NAMES={lavori:"Video",reels:"Reels",foto:"Foto",reel:"Showreel",servizi:"Servizi",about:"Chi sono"};
 function txt(k,v,ph=""){return `<input type="text" data-f="${k}" value="${esc(v||"")}" placeholder="${esc(ph)}">`}
 function sel(k,v,opts){return `<select data-f="${k}">${opts.map(([a,b])=>`<option value="${a}" ${a===v?"selected":""}>${b}</option>`).join("")}</select>`}
 function panRender(){const H=SITE.header,M=SITE.meta,C=Object.assign({},DEFCOL,SITE.colors);
